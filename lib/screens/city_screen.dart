@@ -7,6 +7,9 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+
+  String cityName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +36,27 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(style: TextStyle(color: Colors.black),//Note how TextField was used for a searchBox
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,//Filling Colors
+                      icon: Icon(
+                        Icons.location_city,
+                        color: Colors.white,
+                      ),
+                      hintText: 'Enter City Name',//Default text in searchBox (hintText)
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+                  onChanged: (value){//value = current value in the TextField
+                     cityName=value;
+                  },
+                ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {//now we have to pass the cityName over to previous screen
+
+                  Navigator.pop(context,cityName);
+                },
                 child: Text(
                   'Get Weather',
                   style: kButtonTextStyle,
